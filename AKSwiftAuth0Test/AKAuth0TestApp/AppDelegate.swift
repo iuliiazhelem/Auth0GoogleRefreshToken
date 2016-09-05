@@ -2,9 +2,6 @@
 //  AppDelegate.swift
 //  AKAuth0TestApp
 //
-//  Created by Iuliia Zhelem on 14.07.16.
-//  Copyright © 2016 Akvelon. All rights reserved.
-//
 
 import UIKit
 import Lock
@@ -19,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let lock = A0Lock.sharedLock()
         lock.applicationLaunchedWithOptions(launchOptions)
         
-        let google = A0WebViewAuthenticator(connectionName: "google-oauth2", lock: lock)
+        let google = A0WebViewAuthenticator(connectionName: kGoogleConnectionName, lock: lock)
         lock.registerAuthenticators([google])
         
         A0LockLogger.logAll()

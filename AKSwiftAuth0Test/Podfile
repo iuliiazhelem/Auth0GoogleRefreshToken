@@ -5,7 +5,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'AKAuth0TestApp' do
-    pod 'Lock', '~> 1.24'
+    pod 'Lock', '~> 1.26'
     pod 'SimpleKeychain'
  end
 

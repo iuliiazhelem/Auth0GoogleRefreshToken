@@ -2,9 +2,6 @@
 //  ViewController.swift
 //  AKAuth0TestApp
 //
-//  Created by Iuliia Zhelem on 14.07.16.
-//  Copyright © 2016 Akvelon. All rights reserved.
-//
 
 import UIKit
 import Lock
@@ -15,6 +12,7 @@ class ViewController: UIViewController {
 
     @IBAction func clickGoogleButton(sender: AnyObject) {
         let success:A0IdPAuthenticationBlock = { (profile, token) in
+            print("profile : \(profile)")
             //additional call to get raw user data (not A0UserProfile)
             self.getUserProfileWithAccessToken(token.accessToken)
             
@@ -38,7 +36,7 @@ class ViewController: UIViewController {
             
             ]]
         let parameters = A0AuthParameters(dictionary: [A0ParameterScope : [A0ScopeProfile, A0ScopeOfflineAccess],
-            A0ParameterConnectionScopes : connectionScopes, A0ParameterConnection : kGoogleConnectionName,"access_type" : "offline", "prompt" : "consent"])
+            A0ParameterConnectionScopes : connectionScopes, A0ParameterConnection : kGoogleConnectionName,"access_type" : "offline"/*, "prompt" : "consent"*/, "approval_prompt" : "force"])
         
         //"prompt" : "consent" - was added for testing
         //https://developers.google.com/identity/protocols/OAuth2WebServer#offline
@@ -72,6 +70,8 @@ class ViewController: UIViewController {
                             print("\(json)")
                             if let refreshToken = json["identities"]![0]["refresh_token"], let actRefreshToken = refreshToken {
                                 print("actRefreshToken: \(actRefreshToken)")
+                            } else {
+                                print("There is no refresh_token in userProfile")
                             }
                         } catch {
                             let dataString = String(data: data!, encoding: NSUTF8StringEncoding)

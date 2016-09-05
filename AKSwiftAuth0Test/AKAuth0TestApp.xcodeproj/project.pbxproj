@@ -12,6 +12,7 @@
 		222AAABD1D37BBFA007236DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 222AAABB1D37BBFA007236DD /* Main.storyboard */; };
 		222AAABF1D37BBFA007236DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 222AAABE1D37BBFA007236DD /* Assets.xcassets */; };
 		222AAAC21D37BBFA007236DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 222AAAC01D37BBFA007236DD /* LaunchScreen.storyboard */; };
+		223ED56C1D79FF21001FD897 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 223ED56B1D79FF21001FD897 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,17 +23,8 @@
 		222AAABE1D37BBFA007236DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		222AAAC11D37BBFA007236DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		222AAAC31D37BBFA007236DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		223ED56B1D79FF21001FD897 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		222AAAB11D37BBFA007236DD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		222AAAAB1D37BBFA007236DD = {
@@ -54,6 +46,7 @@
 		222AAAB61D37BBFA007236DD /* AKAuth0TestApp */ = {
 			isa = PBXGroup;
 			children = (
+				223ED56B1D79FF21001FD897 /* GoogleService-Info.plist */,
 				222AAAB71D37BBFA007236DD /* AppDelegate.swift */,
 				222AAAB91D37BBFA007236DD /* ViewController.swift */,
 				222AAABB1D37BBFA007236DD /* Main.storyboard */,
@@ -72,7 +65,6 @@
 			buildConfigurationList = 222AAAC61D37BBFA007236DD /* Build configuration list for PBXNativeTarget "AKAuth0TestApp" */;
 			buildPhases = (
 				222AAAB01D37BBFA007236DD /* Sources */,
-				222AAAB11D37BBFA007236DD /* Frameworks */,
 				222AAAB21D37BBFA007236DD /* Resources */,
 			);
 			buildRules = (
@@ -123,6 +115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				222AAAC21D37BBFA007236DD /* LaunchScreen.storyboard in Resources */,
+				223ED56C1D79FF21001FD897 /* GoogleService-Info.plist in Resources */,
 				222AAABF1D37BBFA007236DD /* Assets.xcassets in Resources */,
 				222AAABD1D37BBFA007236DD /* Main.storyboard in Resources */,
 			);
@@ -253,7 +246,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AKAuth0TestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.akvelon.AKAuth0TestApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.auth0.AKAuth0TestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -264,7 +257,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AKAuth0TestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.akvelon.AKAuth0TestApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.auth0.AKAuth0TestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -288,6 +281,7 @@
 				222AAAC81D37BBFA007236DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

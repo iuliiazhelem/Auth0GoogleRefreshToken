@@ -6,7 +6,7 @@
     <string>pj1N9W644zMIyI62UZqNIFnYCdsnwt9V</string>
     <key>Auth0Domain</key>
     <string>juliazhelem.eu.auth0.com</string>
-    <key>CFBundleDevelopmentRegion</key>
+	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
@@ -22,6 +22,8 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
     <key>CFBundleURLTypes</key>
     <array>
         <dict>
@@ -49,12 +51,10 @@
             <string>None</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.akvelon.AKAuth0TestApp</string>
+                <string>com.auth0.AKAuth0TestApp</string>
             </array>
         </dict>
     </array>
-	<key>CFBundleVersion</key>
-	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -78,27 +78,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>CLIENT_ID</key>
-    <string>514652084725-lbq4ulvpadvb4mmumqg7q3b46mvnshcd.apps.googleusercontent.com</string>
-    <key>REVERSED_CLIENT_ID</key>
-    <string>com.googleusercontent.apps.514652084725-lbq4ulvpadvb4mmumqg7q3b46mvnshcd</string>
-    <key>PLIST_VERSION</key>
-    <string>1</string>
-    <key>BUNDLE_ID</key>
-    <string>com.akvelon.AKAuth0TestApp</string>
-    <key>PROJECT_ID</key>
-    <string>akauth0testapp</string>
-    <key>IS_ADS_ENABLED</key>
-    <false/>
-    <key>IS_ANALYTICS_ENABLED</key>
-    <false/>
-    <key>IS_APPINVITE_ENABLED</key>
-    <false/>
-    <key>IS_GCM_ENABLED</key>
-    <false/>
-    <key>IS_SIGNIN_ENABLED</key>
-    <true/>
-    <key>GOOGLE_APP_ID</key>
-    <string>1:514652084725:ios:266a2468cb81c6c3</string>
 </dict>
 </plist>

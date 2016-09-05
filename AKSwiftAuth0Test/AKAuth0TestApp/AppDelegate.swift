@@ -16,9 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let lock = A0Lock.sharedLock()
         lock.applicationLaunchedWithOptions(launchOptions)
         
+        //Register google authenticator
         let google = A0WebViewAuthenticator(connectionName: kGoogleConnectionName, lock: lock)
         lock.registerAuthenticators([google])
         
+        //Add logging
         A0LockLogger.logAll()
 
         return true
@@ -46,10 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
+    //to allow native logins using other iOS apps, e.g: Twitter, Facebook, Safari etc
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 

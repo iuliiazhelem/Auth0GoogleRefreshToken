@@ -21,11 +21,11 @@
                                 <rect key="frame" x="20" y="35" width="211" height="30"/>
                                 <color key="backgroundColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <state key="normal" title="Open Lock UI">
+                                <state key="normal" title="GOOGLE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="clickOpenLockUIButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CJ1-RZ-OIW"/>
+                                    <action selector="clickGoogleButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9gu-NY-jMN"/>
                                 </connections>
                             </button>
                         </subviews>

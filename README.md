@@ -1,14 +1,13 @@
 # Auth0GoogleRefreshToken
-Test example for getting Google refresh token
 
-This sample exposes how to integrate social connections into your application (Microsoft, Google, Twitter, LinkedIn, Instagram) using Auth0.
+This sample exposes how to get Google refresh token using Lock.
+
+In some scenarios, you might want to access Google APIs from your application. You do that by using the access_token stored on the identities array (user.identities[0].access_token). However access_tokens have an expiration and in order to get a new one, you have to ask the user to login again. That's why Google allows asking for a refresh_token that can be used forever (until the user revokes it) to obtain new access_tokens without requiring the user to relogin. The way you ask for a refresh_token using Lock is by sending the access_type=offline as an extra parameter.
+The only caveat is that Google will send you the refresh_token only once, and if you haven't stored it, you will have to ask for it again and add approval_prompt=force so the user explicitly consent again.
 
 For this you need to add the following to your `Podfile`:
 ```
 pod 'Lock', '~> 1.24'
-pod 'Lock-Twitter', '~> 1.1'
-pod 'Lock-Google', '~> 2.0'
-pod 'GoogleUtilities', '1.1.0'
 pod 'SimpleKeychain'
 ```
 
@@ -45,3 +44,7 @@ Before using the example please make sure that you change some keys in the `Info
 <string>{REVERSED_CLIENT_ID}</string>
 </array>
 ```
+
+For more details please look at links:
+* [Google Identity Offline access](https://developers.google.com/identity/protocols/OAuth2WebServer#offline)
+* 

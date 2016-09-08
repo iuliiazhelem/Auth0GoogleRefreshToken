@@ -15,12 +15,14 @@ static NSString *kGoogleConnectionName = @"google-oauth2";
 
 @implementation ViewController
 
+// Step 1: Login to Google with additional parameter "access_type" = "offline"
 - (IBAction)clickGoogleButton:(id)sender {
     A0Lock *lock = [A0Lock sharedLock];
     
     void(^success)(A0UserProfile *, A0Token *) = ^(A0UserProfile *profile, A0Token *token) {
         NSLog(@"profile : %@", profile);
-        //additional call to get raw user data (not A0UserProfile)
+        
+        //Additional call to get raw user data (not A0UserProfile) which will contain refresh_token
         [self getUserProfileWithAccessToken:token.accessToken];
     };
 
@@ -29,17 +31,9 @@ static NSString *kGoogleConnectionName = @"google-oauth2";
     };
 
     A0AuthParameters *parameters = [A0AuthParameters newWithScopes:@[A0ScopeProfile, A0ScopeOfflineAccess]];
-    NSDictionary *connectionScopes = @{kGoogleConnectionName : @[
-                                                     @"https://www.googleapis.com/auth/gmail.readonly",
-                                                     @"https://www.googleapis.com/auth/calendar.readonly",
-                                                     @"https://www.googleapis.com/auth/drive.readonly",
-                                                     @"https://www.googleapis.com/auth/contacts.readonly"
-                                                     ]};
-    //parameters[A0ParameterConnectionScopes] = connectionScopes;
     parameters[A0ParameterConnection] = kGoogleConnectionName;
     parameters[@"access_type"] = @"offline";
-    parameters[@"approval_prompt"] = @"force";
-    //params[@"prompt"] = @"consent";
+    parameters[@"prompt"] = @"consent";
     
     //"prompt" : "consent" - was added for testing
     //https://developers.google.com/identity/protocols/OAuth2WebServer#offline
@@ -51,6 +45,7 @@ static NSString *kGoogleConnectionName = @"google-oauth2";
                                                                  failure: failure];
 }
 
+// Step 2: Get raw JSON with user data
 - (void)getUserProfileWithAccessToken:(NSString *)accessToken {
     // GET request
     // We need url "https://<Auth0 Domain>/userinfo"
@@ -82,6 +77,6 @@ static NSString *kGoogleConnectionName = @"google-oauth2";
                                                     }
                                                 }];
     [dataTask resume];
-
 }
+
 @end

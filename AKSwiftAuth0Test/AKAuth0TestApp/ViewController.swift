@@ -10,33 +10,20 @@ let kGoogleConnectionName = "google-oauth2"
 
 class ViewController: UIViewController {
 
+    // Step 1: Login to Google with additional parameter "access_type" = "offline"
     @IBAction func clickGoogleButton(sender: AnyObject) {
         let success:A0IdPAuthenticationBlock = { (profile, token) in
             print("profile : \(profile)")
-            //additional call to get raw user data (not A0UserProfile)
-            self.getUserProfileWithAccessToken(token.accessToken)
             
-            //or if you have replaced A0UserIdentity with changed files 
-            //from the folder Auth0GoogleRefreshToken/Identity
-            //if let firstIdentity = profile.identities.first, let googleRefreshToken = firstIdentity.refreshToken {
-            //use googleAccessToken here...
-            //}
+            //Additional call to get raw user data (not A0UserProfile) which will contain refresh_token
+            self.getUserProfileWithAccessToken(token.accessToken)
         }
             
         let failure = { (error: NSError) in
             print("Oops something went wrong: \(error)")
-            
         }
         
-         let connectionScopes = [kGoogleConnectionName : [
-            "https://www.googleapis.com/auth/gmail.readonly",
-            "https://www.googleapis.com/auth/calendar.readonly",
-            "https://www.googleapis.com/auth/drive.readonly",
-            "https://www.googleapis.com/auth/contacts.readonly"
-            
-            ]]
-        let parameters = A0AuthParameters(dictionary: [A0ParameterScope : [A0ScopeProfile, A0ScopeOfflineAccess],
-            A0ParameterConnectionScopes : connectionScopes, A0ParameterConnection : kGoogleConnectionName,"access_type" : "offline"/*, "prompt" : "consent"*/, "approval_prompt" : "force"])
+        let parameters = A0AuthParameters(dictionary: [A0ParameterScope : [A0ScopeProfile, A0ScopeOfflineAccess], "access_type" : "offline", "prompt" : "consent"])
         
         //"prompt" : "consent" - was added for testing
         //https://developers.google.com/identity/protocols/OAuth2WebServer#offline
@@ -46,12 +33,13 @@ class ViewController: UIViewController {
         
     }
     
+    // Step 2: Get raw JSON with user data
     func getUserProfileWithAccessToken(accessToken:String?) -> Void {
+        // GET request
+        // We need url "https://<Auth0 Domain>/userinfo"
+        // and header "Authorization : Bearer <accessToken>"
+        
         if let actualAccessToken = accessToken {
-            // GET request
-            // We need url "https://<Auth0 Domain>/userinfo"
-            // and header "Authorization : Bearer <accessToken>"
-            
             let userDomain = (NSBundle.mainBundle().infoDictionary!["Auth0Domain"]) as! String
             let urlString = "https://\(userDomain)/userinfo"
             let url = NSURL(string: urlString)
@@ -81,12 +69,7 @@ class ViewController: UIViewController {
                         print("Oops something went wrong: \(error)")
                     }
                 }).resume()
-            } else {
-                print("Incorrect url")
             }
-        } else {
-            
-            print("Incorrect token");
         }
     }
 }

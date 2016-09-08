@@ -3,7 +3,8 @@
 This sample exposes how to get Google refresh token using Lock.
 
 In some scenarios, you might want to access Google APIs from your application. You do that by using the access_token stored on the identities array (user.identities[0].access_token). However access_tokens have an expiration and in order to get a new one, you have to ask the user to login again. That's why Google allows asking for a refresh_token that can be used forever (until the user revokes it) to obtain new access_tokens without requiring the user to relogin. The way you ask for a refresh_token using Lock is by sending the access_type=offline as an extra parameter.
-Important: When your application receives a refresh token, it is important to store that refresh token for future use. If your application loses the refresh token, it will have to re-prompt the user for consent before obtaining another refresh token. If you need to re-prompt the user for consent, include the prompt parameter in the authorization code request, and set the value to consent. So for testing you can add parameter "prompt" : "consent" to your authenticate request.
+### Important: 
+When your application receives a refresh token, it is important to store that refresh token for future use. If your application loses the refresh token, it will have to re-prompt the user for consent before obtaining another refresh token. If you need to re-prompt the user for consent, include the prompt parameter in the authorization code request, and set the value to consent. So for testing you can add parameter `"prompt" : "consent"` to your authenticate request.
 
 For this you need to add the following to your `Podfile`:
 ```
@@ -25,7 +26,7 @@ A0WebViewAuthenticator *google = [[A0WebViewAuthenticator alloc] initWithConnect
 [lock registerAuthenticators:@[google]];
 ```
 
-### Step 2: Authenticate with a Connection name "google-oauth2"
+### Step 2: Authenticate with a "google-oauth2" connection
 ```swift
 let success = { (profile: A0UserProfile, token: A0Token) in
   print("User: \(profile)")
@@ -52,22 +53,21 @@ A0AuthParameters *parameters = [A0AuthParameters newWithScopes:@[A0ScopeProfile,
 parameters[@"access_type"] = @"offline";
 params[@"prompt"] = @"consent";
 
-[[lock identityProviderAuthenticator] authenticateWithConnectionName:connectionName
+[[lock identityProviderAuthenticator] authenticateWithConnectionName:@"google-oauth2"
                                                           parameters:parameters
                                                              success:success
                                                              failure:error];
 ```
 
-### Step 3: Additional call to get raw user data (not A0UserProfile). It is GET request with url "https://<Auth0 Domain>/userinfo" and header "Authorization : Bearer <accessToken>". You need to use accessToken from previous step.
+### Step 3: Additional call to get raw user data (not A0UserProfile) which will contain refresh_token. It is GET request with url "https://Auth0Domain/userinfo" and header "Authorization : Bearer <accessToken>". You need to use accessToken from previous step.
 
 ```Swift
-let userDomain = (NSBundle.mainBundle().infoDictionary!["Auth0Domain"]) as! String
-let urlString = "https://\(userDomain)/userinfo"
+let urlString = "https://\(<ATUH0_DOMAIN>)/userinfo"
 let url = NSURL(string: urlString)
 if let actualUrl = url {
   let request = NSMutableURLRequest(URL: actualUrl)
   request.HTTPMethod = "GET";
-  request.allHTTPHeaderFields = ["Authorization" : "Bearer \(actualAccessToken)"]
+  request.allHTTPHeaderFields = ["Authorization" : "Bearer \(<ACCESS_TOKEN>)"]
                 
   NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: {(data : NSData?, response : NSURLResponse?, error : NSError?) in
   // Check if data was received successfully
@@ -88,13 +88,11 @@ if let actualUrl = url {
     print("Oops something went wrong: \(error)")
   }
   }).resume()
-} else {
-  print("Incorrect url")
 }
 ```
 ```Objective_c
-NSDictionary *headers = @{ @"Authorization": [NSString stringWithFormat:@"Bearer %@", accessToken] };
-NSString *urlString = [NSString stringWithFormat:@"https://%@/userinfo", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Auth0Domain"]];
+NSDictionary *headers = @{ @"Authorization": [NSString stringWithFormat:@"Bearer %@", <ACCESS_TOKEN>] };
+NSString *urlString = [NSString stringWithFormat:@"https://%@/userinfo", <AUTH0_DOMAIN>];
 NSURL *url = [NSURL URLWithString:urlString];
     
 NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
@@ -109,7 +107,6 @@ NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
                                                 if (error) {
                                                   NSLog(@"%@", error);
                                                 } else {
-                                                  NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
                                                   NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
                                                   NSString *refresh_token = dict[@"isentities"][0][@"refresh_token"];
                                                   NSLog(@"refresh_token : %@", refresh_token);
